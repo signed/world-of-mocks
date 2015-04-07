@@ -20,7 +20,7 @@ public class MethodCallsTest {
     /**
      * as stated in http://easymock.org/getting-started.html
      */
-    public static class EasyMock extends EasyMockSupport {
+    public static class EasyMockWithSupperClass extends EasyMockSupport {
 
         @Rule
         public EasyMockRule rule = new EasyMockRule(this);
@@ -38,7 +38,7 @@ public class MethodCallsTest {
         }
     }
 
-    public static class EasyMockWithoutExtending {
+    public static class EasyMock {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = org.easymock.EasyMock.createMock(List.class);
