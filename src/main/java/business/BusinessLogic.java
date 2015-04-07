@@ -1,16 +1,15 @@
 package business;
 
-import javafx.util.Callback;
+import java.util.function.Function;
 
 public class BusinessLogic {
-    private Callback<Result, Void> resultCallback;
+    private Function<Result, Void> resultCallback;
 
-    public void onSuccess(Callback<Result, Void> resultCallback) {
-
+    public void onSuccess(Function<Result, Void> resultCallback) {
         this.resultCallback = resultCallback;
     }
 
     public void runLogic() {
-        resultCallback.call(new Result("Everything was fine"));
+        resultCallback.apply(new Result("Everything was fine"));
     }
 }
