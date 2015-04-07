@@ -1,7 +1,11 @@
-apply plugin:'java'
-
+apply plugin: 'java'
 
 
 task wrapper(type: Wrapper) {
     gradleVersion = '2.3'
+}
+
+
+dependencies {
+    testCompile('org.mockito:mockito-core:1.10.19' , 'org.easymock:easymock:3.3.1')
 }
