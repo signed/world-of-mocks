@@ -17,19 +17,6 @@ import org.junit.runner.RunWith;
 @RunWith(Enclosed.class)
 public class MethodCallsTest {
 
-    public static class Mockito {
-
-        @SuppressWarnings("unchecked")
-        private final List<String> list = mock(List.class);
-
-        @Test
-        public void ensureMethodWasCalled() throws Exception {
-            list.add("one");
-
-            verify(list).add("one");
-        }
-    }
-
     /**
      * as stated in http://easymock.org/getting-started.html
      */
@@ -49,6 +36,34 @@ public class MethodCallsTest {
             list.add("one");
             verifyAll();
         }
-
     }
+
+    public static class EasyMockWithoutExtending {
+
+        @SuppressWarnings("unchecked")
+        private final List<String> list = org.easymock.EasyMock.createMock(List.class);
+
+        @Test
+        public void ensureMethodWasCalled() throws Exception {
+            expect(list.add("one")).andReturn(Boolean.TRUE);
+            org.easymock.EasyMock.replay(list);
+
+            list.add("one");
+            org.easymock.EasyMock.verify(list);
+        }
+    }
+
+    public static class Mockito {
+
+        @SuppressWarnings("unchecked")
+        private final List<String> list = mock(List.class);
+
+        @Test
+        public void ensureMethodWasCalled() throws Exception {
+            list.add("one");
+
+            verify(list).add("one");
+        }
+    }
+
 }
