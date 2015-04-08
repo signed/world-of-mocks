@@ -24,10 +24,7 @@
 * [EasyMock facts and fallacies](http://blog.octo.com/en/easymock-facts-fallacies/)
 
 # Samples ToDo # 
-1. Throw an exception on call
-    - void methods
-    - with return values
-   
 1. ArgumentMatchers
+1. In Order
 
 
