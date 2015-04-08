@@ -38,7 +38,6 @@ public class ThrowExceptionTest {
 
             list.clear();
         }
-
     }
 
     public static class Mockito {

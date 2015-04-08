@@ -53,6 +53,9 @@ public class MethodCallsTest {
         }
     }
 
+    /**
+     * Verification is explicit - verification errors point at line of code showing what interaction failed
+     */
     public static class Mockito {
 
         @SuppressWarnings("unchecked")

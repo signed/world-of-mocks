@@ -16,7 +16,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 @RunWith(Enclosed.class)
-public class ReturnValuesFromMethodCallsTest {
+public class StubbingMethodsTest {
 
     public static class EasyMock{
 
@@ -34,6 +34,11 @@ public class ReturnValuesFromMethodCallsTest {
 
     }
 
+    /**
+     * Verification of stubbed methods is optional because usually it's
+     * more important to test if the stubbed value is used correctly
+     * rather than where's it come from.
+     */
     public static class Mockito {
 
         @SuppressWarnings("unchecked")
