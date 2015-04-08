@@ -14,17 +14,21 @@
 [refcard](http://refcardz.dzone.com/refcardz/mockito) 
 
 - There are no strict mocks
-- All mocks are nice mocks (returning 0, false, null by default)
+- All mocks are nice mocks (returning 0, false, null  + empty collections by default)
 
 
+# currently working on # 
+* [mockito wiki](https://github.com/mockito/mockito/wiki/Mockito-vs-EasyMock)
+* [EasyMock user guide](http://easymock.org/user-guide.html)
 
 # Comparison of giants #
-* [mockito wiki](https://github.com/mockito/mockito/wiki/Mockito-vs-EasyMock)
 * [comparison matrix by jmockit](http://jmockit.org/MockingToolkitComparisonMatrix.html)
 * [EasyMock facts and fallacies](http://blog.octo.com/en/easymock-facts-fallacies/)
 
+
 # Samples ToDo # 
-1. ArgumentMatchers
 1. In Order
+   - within one mock
+   - between mocks
 
 
