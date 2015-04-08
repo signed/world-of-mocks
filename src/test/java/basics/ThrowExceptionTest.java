@@ -1,5 +1,6 @@
 package basics;
 
+import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
@@ -18,7 +19,8 @@ public class ThrowExceptionTest {
 
     public static class EasyMock {
 
-        private final List<String> list = org.easymock.EasyMock.createNiceMock(List.class);
+        @SuppressWarnings("unchecked")
+        private final List<String> list = createNiceMock(List.class);
 
         @Test(expected = RuntimeException.class)
         public void methodWithReturnValue() throws Exception {
@@ -41,6 +43,7 @@ public class ThrowExceptionTest {
 
     public static class Mockito {
 
+        @SuppressWarnings("unchecked")
         private final List<String> list = mock(List.class);
 
         @Test(expected = RuntimeException.class)
