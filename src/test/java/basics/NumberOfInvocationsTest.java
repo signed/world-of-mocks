@@ -12,15 +12,12 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import annotations.UnderTest;
+
 @RunWith(Enclosed.class)
 public class NumberOfInvocationsTest {
 
-    private static void callClearTwoTimes(List<String> list) {
-        list.clear();
-        list.clear();
-    }
-
-    public static class EasyMock {
+    public static class WithEasyMock {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = createNiceMock(List.class);
@@ -35,9 +32,9 @@ public class NumberOfInvocationsTest {
 
             verify(list);
         }
-    }
 
-    public static class Mockito {
+    }
+    public static class WithMockito {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = mock(List.class);
@@ -48,6 +45,13 @@ public class NumberOfInvocationsTest {
 
             org.mockito.Mockito.verify(list, org.mockito.Mockito.times(2)).clear();
         }
+
+    }
+
+    @UnderTest
+    private static void callClearTwoTimes(List<String> list) {
+        list.clear();
+        list.clear();
     }
 
 }

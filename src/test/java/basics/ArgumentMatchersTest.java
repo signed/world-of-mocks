@@ -13,6 +13,7 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import annotations.UnderTest;
 import business.Result;
 
 @RunWith(Enclosed.class)
@@ -24,15 +25,15 @@ public class ArgumentMatchersTest {
         void callMethod(Result result);
     }
 
-    public static class EasyMock {
+    public static class WithEasyMock {
+        private final MethodWithTwoParameters mock = createNiceMock(MethodWithTwoParameters.class);
 
         @Test
         public void matcherForPrimitiveTypes() throws Exception {
-            MethodWithTwoParameters mock = createNiceMock(MethodWithTwoParameters.class);
             mock.callMethod(org.easymock.EasyMock.anyString(), org.easymock.EasyMock.startsWith("Hello"));
             replay(mock);
 
-            mock.callMethod("any string", "Hello world");
+            callMethodWithPrimitivesOn(mock);
 
             org.easymock.EasyMock.verify(mock);
         }
@@ -41,14 +42,14 @@ public class ArgumentMatchersTest {
     /**
      * Custom argument matchers use hamcrest matchers, so you can use your existing hamcrest matchers.
      */
-    public static class Mockito {
+    public static class WithMockito {
         private final MethodWithTwoParameters mock = mock(MethodWithTwoParameters.class);
 
         @Test
         public void matcherForPrimitiveTypes() throws Exception {
-            mock.callMethod("any string", "Hello World");
+            callMethodWithPrimitivesOn(mock);
 
-            verify(mock).callMethod(anyString(), startsWith("Hello"));
+            verify(this.mock).callMethod(anyString(), startsWith("Hello"));
         }
 
         @Test
@@ -57,5 +58,10 @@ public class ArgumentMatchersTest {
 
             verify(mock).callMethod(argThat(message(org.hamcrest.CoreMatchers.startsWith("Hello"))));
         }
+    }
+
+    @UnderTest
+    private static void callMethodWithPrimitivesOn(MethodWithTwoParameters mock) {
+        mock.callMethod("any string", "Hello World");
     }
 }

@@ -14,6 +14,7 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
+import org.mockito.Mockito;
 
 import annotations.UnderTest;
 import business.Result;
@@ -28,11 +29,12 @@ public class BetterVerificationFailureReportingTest {
         void method(String one, String two, Result result);
     }
 
-    public static class EasyMock {
+    public static class WithEasyMock {
+
+        private final Interface mock = createNiceMock(Interface.class);
 
         @Test
         public void bunchOfArgumentMatchers() throws Exception {
-            Interface mock = createNiceMock(Interface.class);
             Capture<Result> result = newCapture();
             mock.method(eq("1"), eq("2"), capture(result));
             replay(mock);
@@ -44,20 +46,18 @@ public class BetterVerificationFailureReportingTest {
         }
     }
 
-    public static class Mockito {
+    public static class WithMockito {
+        private final Interface mock = Mockito.mock(Interface.class);
 
         @Test
         public void bunchOfArgumentMatchers() throws Exception {
-            Interface mock = org.mockito.Mockito.mock(Interface.class);
-
             callBusinessLogicOn(mock);
 
             ArgumentCaptor<Result> result = ArgumentCaptor.forClass(Result.class);
-            org.mockito.Mockito.verify(mock).method(org.mockito.Mockito.eq("1"), org.mockito.Mockito.eq("2"), result.capture());
+            Mockito.verify(mock).method(Mockito.eq("1"), Mockito.eq("2"), result.capture());
 
             assertThat(result.getValue().message, is("the result"));
         }
-
     }
 
     @UnderTest

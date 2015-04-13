@@ -15,10 +15,12 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import annotations.UnderTest;
+
 @RunWith(Enclosed.class)
 public class StubbingMethodsTest {
 
-    public static class EasyMock{
+    public static class EasyMock {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = createNiceMock(List.class);
@@ -28,7 +30,7 @@ public class StubbingMethodsTest {
             expect(list.get(0)).andReturn("the prepared value");
             replay(list);
 
-            assertThat(list.get(0), is("the prepared value"));
+            assertThat(firstElementIn(list), is("the prepared value"));
             verify(list);
         }
 
@@ -48,8 +50,14 @@ public class StubbingMethodsTest {
         public void configureAMockToReturnAValue() throws Exception {
             when(list.get(0)).thenReturn("the prepared value");
 
-            assertThat(list.get(0), is("the prepared value"));
+            List<String> list = this.list;
+            assertThat(firstElementIn(list), is("the prepared value"));
         }
+    }
+
+    @UnderTest
+    private static String firstElementIn(List<String> list) {
+        return list.get(0);
     }
 
 }

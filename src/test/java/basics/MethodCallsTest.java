@@ -40,7 +40,7 @@ public class MethodCallsTest {
         }
     }
 
-    public static class EasyMock {
+    public static class WithEasyMock {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = org.easymock.EasyMock.createMock(List.class);
@@ -58,7 +58,7 @@ public class MethodCallsTest {
     /**
      * # Verification is explicit - verification errors point at line of code showing what interaction failed
      */
-    public static class Mockito {
+    public static class WithMockito {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = mock(List.class);
