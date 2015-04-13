@@ -14,6 +14,8 @@ import org.junit.Test;
 import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
+import annotations.UnderTest;
+
 @RunWith(Enclosed.class)
 public class MethodCallsTest {
 
@@ -33,7 +35,7 @@ public class MethodCallsTest {
             expect(list.add("one")).andReturn(Boolean.TRUE);
             replayAll();
 
-            list.add("one");
+            callAddOneOn(list);
             verifyAll();
         }
     }
@@ -48,13 +50,13 @@ public class MethodCallsTest {
             expect(list.add("one")).andReturn(Boolean.TRUE);
             org.easymock.EasyMock.replay(list);
 
-            list.add("one");
-            org.easymock.EasyMock.verify(list);
+            callAddOneOn(list);
+            org.easymock.EasyMock.verify(this.list);
         }
     }
 
     /**
-     * Verification is explicit - verification errors point at line of code showing what interaction failed
+     * # Verification is explicit - verification errors point at line of code showing what interaction failed
      */
     public static class Mockito {
 
@@ -63,10 +65,14 @@ public class MethodCallsTest {
 
         @Test
         public void ensureMethodWasCalled() throws Exception {
-            list.add("one");
+            callAddOneOn(list);
 
             verify(list).add("one");
         }
     }
 
+    @UnderTest
+    private static void callAddOneOn(List<String> list) {
+        list.add("one");
+    }
 }
