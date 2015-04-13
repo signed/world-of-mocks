@@ -1,8 +1,6 @@
 package basic;
 
-import static org.easymock.EasyMock.expect;
-
-import java.util.List;
+import static org.mockito.Mockito.mock;
 
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
@@ -17,47 +15,53 @@ import annotations.UnderTest;
 @RunWith(Enclosed.class)
 public class InOrderVerificationTest {
 
+    public interface ProtectiveGear{
+
+        void  equip();
+
+        void placeIndianaJonesSticker();
+    }
+
+    public interface PandorasBox{
+        void open();
+    }
+
     public static class WithEasyMock {
 
         private final IMocksControl control = EasyMock.createStrictControl();
-        @SuppressWarnings("unchecked")
-        private final List<String> one = control.createMock(List.class);
-        @SuppressWarnings("unchecked")
-        private final List<String> two = control.createMock(List.class);
+        private final PandorasBox pandorasBox = control.createMock(PandorasBox.class);
+        private final ProtectiveGear protectiveGear = control.createMock(ProtectiveGear.class);
 
         @Test
         public void ensureCalledInOrder() throws Exception {
-            expect(one.add("one")).andReturn(true);
-            expect(two.add("two")).andReturn(true);
+            protectiveGear.equip();
+            pandorasBox.open();
             control.replay();
 
-            addElementsInOrderTo(one, two);
+            addElementsInOrderTo(protectiveGear, pandorasBox);
 
             control.verify();
         }
     }
 
     public static class WithMockito {
-
-        @SuppressWarnings("unchecked")
-        private final List<String> one = Mockito.mock(List.class);
-        @SuppressWarnings("unchecked")
-        private final List<String> two = Mockito.mock(List.class);
+        private final PandorasBox pandorasBox = mock(PandorasBox.class);
+        private final ProtectiveGear protectiveGear = mock(ProtectiveGear.class);
 
         @Test
         public void ensureCalledInOrder() throws Exception {
-            addElementsInOrderTo(one, two);
+            addElementsInOrderTo(protectiveGear, pandorasBox);
 
-            InOrder order = Mockito.inOrder(one, two);
-            order.verify(one).add("one");
-            order.verify(two).add("two");
+            InOrder order = Mockito.inOrder(protectiveGear, pandorasBox);
+            order.verify(protectiveGear).equip();
+            order.verify(pandorasBox).open();
         }
     }
 
     @UnderTest
-    private static void addElementsInOrderTo(List<String> one, List<String> two) {
-        one.add("one");
-        two.add("two");
+    private static void addElementsInOrderTo(ProtectiveGear protectiveGear, PandorasBox pandorasBox) {
+        protectiveGear.equip();
+        pandorasBox.open();
     }
 
 }
