@@ -1,4 +1,4 @@
-package basics;
+package basic;
 
 import static org.easymock.EasyMock.expect;
 import static org.mockito.Mockito.mock;

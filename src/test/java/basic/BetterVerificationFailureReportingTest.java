@@ -1,4 +1,4 @@
-package basics;
+package basic;
 
 import static org.easymock.EasyMock.capture;
 import static org.easymock.EasyMock.createNiceMock;

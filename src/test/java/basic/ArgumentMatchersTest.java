@@ -1,4 +1,4 @@
-package basics;
+package basic;
 
 import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.replay;
