@@ -50,7 +50,6 @@ public class StubbingMethodsTest {
         public void configureAMockToReturnAValue() throws Exception {
             when(list.get(0)).thenReturn("the prepared value");
 
-            List<String> list = this.list;
             assertThat(firstElementIn(list), is("the prepared value"));
         }
     }
