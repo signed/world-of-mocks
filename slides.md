@@ -1,0 +1,1 @@
+[slides](https://github.com/mockito/mockito/wiki/Mockito-vs-EasyMock#similarities)
