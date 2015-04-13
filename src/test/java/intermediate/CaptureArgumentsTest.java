@@ -17,7 +17,7 @@ import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 
-import business.BusinessLogic;
+import annotations.UnderTest;
 import business.Result;
 
 @RunWith(Enclosed.class)
@@ -64,4 +64,16 @@ public class CaptureArgumentsTest {
         }
     }
 
+    @UnderTest
+    public static class BusinessLogic {
+        private Function<Result, Void> resultCallback;
+
+        public void onSuccess(Function<Result, Void> resultCallback) {
+            this.resultCallback = resultCallback;
+        }
+
+        public void runLogic() {
+            resultCallback.apply(new Result("Everything was fine"));
+        }
+    }
 }
