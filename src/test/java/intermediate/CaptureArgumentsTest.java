@@ -24,7 +24,7 @@ import business.Result;
 public class CaptureArgumentsTest {
 
 
-    public static class EasyMock {
+    public static class WithEasyMock {
 
         @SuppressWarnings("unchecked")
         private final Function<Result, Void> callback = createNiceMock(Function.class);
@@ -46,7 +46,7 @@ public class CaptureArgumentsTest {
         }
     }
 
-    public static class Mockito {
+    public static class WithMockito {
 
         @SuppressWarnings("unchecked")
         private final Function<Result, Void> callback = mock(Function.class);

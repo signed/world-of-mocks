@@ -20,7 +20,7 @@ import annotations.UnderTest;
 @RunWith(Enclosed.class)
 public class StubbingMethodsTest {
 
-    public static class EasyMock {
+    public static class WithEasyMock {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = createNiceMock(List.class);
@@ -41,7 +41,7 @@ public class StubbingMethodsTest {
      * more important to test if the stubbed value is used correctly
      * rather than where's it come from.
      */
-    public static class Mockito {
+    public static class WithMockito {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = mock(List.class);
