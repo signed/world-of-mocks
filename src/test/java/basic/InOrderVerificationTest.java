@@ -5,14 +5,14 @@ import static org.mockito.Mockito.mock;
 import org.easymock.EasyMock;
 import org.easymock.IMocksControl;
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.mockito.InOrder;
 import org.mockito.Mockito;
 
 import annotations.UnderTest;
+import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
-@RunWith(Enclosed.class)
+@RunWith(HierarchicalContextRunner.class)
 public class InOrderVerificationTest {
 
     public interface ProtectiveGear{
@@ -26,14 +26,14 @@ public class InOrderVerificationTest {
         void open();
     }
 
-    public static class WithEasyMock {
+    public class WithEasyMock {
 
         private final IMocksControl control = EasyMock.createStrictControl();
         private final PandorasBox pandorasBox = control.createMock(PandorasBox.class);
         private final ProtectiveGear protectiveGear = control.createMock(ProtectiveGear.class);
 
         @Test
-        public void ensureCalledInOrder() throws Exception {
+        public void ensureProtectiveGearIsPutOnBeforeOpeningPandorasBox() throws Exception {
             protectiveGear.equip();
             pandorasBox.open();
             control.replay();
@@ -44,12 +44,12 @@ public class InOrderVerificationTest {
         }
     }
 
-    public static class WithMockito {
+    public class WithMockito {
         private final PandorasBox pandorasBox = mock(PandorasBox.class);
         private final ProtectiveGear protectiveGear = mock(ProtectiveGear.class);
 
         @Test
-        public void ensureCalledInOrder() throws Exception {
+        public void ensureProtectiveGearIsPutOnBeforeOpeningPandorasBox() throws Exception {
             addElementsInOrderTo(protectiveGear, pandorasBox);
 
             InOrder order = Mockito.inOrder(protectiveGear, pandorasBox);

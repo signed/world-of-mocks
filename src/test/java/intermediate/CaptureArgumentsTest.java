@@ -13,22 +13,22 @@ import java.util.function.Function;
 
 import org.easymock.Capture;
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 
 import annotations.UnderTest;
 import business.Result;
+import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
-@RunWith(Enclosed.class)
+@RunWith(HierarchicalContextRunner.class)
 public class CaptureArgumentsTest {
 
+    private final BusinessLogic logic = new BusinessLogic();
 
-    public static class WithEasyMock {
+    public class WithEasyMock {
 
         @SuppressWarnings("unchecked")
         private final Function<Result, Void> callback = createNiceMock(Function.class);
-        private final BusinessLogic logic = new BusinessLogic();
 
         @Test
         public void captureArgumentPassedToAMock() throws Exception {
@@ -46,11 +46,10 @@ public class CaptureArgumentsTest {
         }
     }
 
-    public static class WithMockito {
+    public class WithMockito {
 
         @SuppressWarnings("unchecked")
         private final Function<Result, Void> callback = mock(Function.class);
-        private final BusinessLogic logic = new BusinessLogic();
 
         @Test
         public void captureArgumentPassedToAMock() throws Exception {

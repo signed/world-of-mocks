@@ -10,13 +10,13 @@ import static org.mockito.Mockito.verify;
 import static support.ResultMatcher.message;
 
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import annotations.UnderTest;
 import business.Result;
+import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
-@RunWith(Enclosed.class)
+@RunWith(HierarchicalContextRunner.class)
 public class ArgumentMatchersTest {
 
     private interface MethodWithTwoParameters {
@@ -25,7 +25,7 @@ public class ArgumentMatchersTest {
         void callMethod(Result result);
     }
 
-    public static class WithEasyMock {
+    public class WithEasyMock {
         private final MethodWithTwoParameters mock = createNiceMock(MethodWithTwoParameters.class);
 
         @Test
@@ -42,7 +42,7 @@ public class ArgumentMatchersTest {
     /**
      * Custom argument matchers use hamcrest matchers, so you can use your existing hamcrest matchers.
      */
-    public static class WithMockito {
+    public class WithMockito {
         private final MethodWithTwoParameters mock = mock(MethodWithTwoParameters.class);
 
         @Test

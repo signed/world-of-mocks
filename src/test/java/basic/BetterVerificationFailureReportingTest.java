@@ -11,25 +11,25 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 import org.easymock.Capture;
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mockito;
 
 import annotations.UnderTest;
 import business.Result;
+import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
 /**
  * example derived from http://stackoverflow.com/a/8632734
  */
-@RunWith(Enclosed.class)
+@RunWith(HierarchicalContextRunner.class)
 public class BetterVerificationFailureReportingTest {
 
     public interface Interface {
         void method(String one, String two, Result result);
     }
 
-    public static class WithEasyMock {
+    public class WithEasyMock {
 
         private final Interface mock = createNiceMock(Interface.class);
 
@@ -46,7 +46,7 @@ public class BetterVerificationFailureReportingTest {
         }
     }
 
-    public static class WithMockito {
+    public class WithMockito {
         private final Interface mock = Mockito.mock(Interface.class);
 
         @Test

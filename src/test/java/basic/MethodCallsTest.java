@@ -11,18 +11,18 @@ import org.easymock.EasyMockSupport;
 import org.easymock.Mock;
 import org.junit.Rule;
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import annotations.UnderTest;
+import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
-@RunWith(Enclosed.class)
+@RunWith(HierarchicalContextRunner.class)
 public class MethodCallsTest {
 
     /**
      * as stated in http://easymock.org/getting-started.html
      */
-    public static class EasyMockWithSupperClass extends EasyMockSupport {
+    public class EasyMockWithSupperClass extends EasyMockSupport {
 
         @Rule
         public EasyMockRule rule = new EasyMockRule(this);
@@ -40,7 +40,7 @@ public class MethodCallsTest {
         }
     }
 
-    public static class WithEasyMock {
+    public class WithEasyMock {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = org.easymock.EasyMock.createMock(List.class);
@@ -58,7 +58,7 @@ public class MethodCallsTest {
     /**
      * # Verification is explicit - verification errors point at line of code showing what interaction failed
      */
-    public static class WithMockito {
+    public class WithMockito {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = mock(List.class);

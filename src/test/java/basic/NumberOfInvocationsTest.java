@@ -3,21 +3,23 @@ package basic;
 import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.expectLastCall;
 import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
 
 import java.util.List;
 
+import org.easymock.EasyMock;
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 
 import annotations.UnderTest;
+import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
-@RunWith(Enclosed.class)
+@RunWith(HierarchicalContextRunner.class)
 public class NumberOfInvocationsTest {
 
-    public static class WithEasyMock {
+    public class WithEasyMock {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = createNiceMock(List.class);
@@ -30,11 +32,12 @@ public class NumberOfInvocationsTest {
 
             callClearTwoTimes(list);
 
-            verify(list);
+            EasyMock.verify(list);
         }
 
     }
-    public static class WithMockito {
+
+    public class WithMockito {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = mock(List.class);
@@ -43,7 +46,7 @@ public class NumberOfInvocationsTest {
         public void ensureMethodWasCalledNTimes() throws Exception {
             callClearTwoTimes(list);
 
-            org.mockito.Mockito.verify(list, org.mockito.Mockito.times(2)).clear();
+            Mockito.verify(list, times(2)).clear();
         }
 
     }

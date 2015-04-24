@@ -3,7 +3,6 @@ package basic;
 import static org.easymock.EasyMock.createNiceMock;
 import static org.easymock.EasyMock.expect;
 import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.verify;
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.mock;
@@ -12,15 +11,15 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import annotations.UnderTest;
+import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
-@RunWith(Enclosed.class)
+@RunWith(HierarchicalContextRunner.class)
 public class StubbingMethodsTest {
 
-    public static class WithEasyMock {
+    public class WithEasyMock {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = createNiceMock(List.class);
@@ -31,7 +30,6 @@ public class StubbingMethodsTest {
             replay(list);
 
             assertThat(firstElementIn(list), is("the prepared value"));
-            verify(list);
         }
 
     }
@@ -39,9 +37,9 @@ public class StubbingMethodsTest {
     /**
      * Verification of stubbed methods is optional because usually it's
      * more important to test if the stubbed value is used correctly
-     * rather than where's it come from.
+     * rather than where it comes from.
      */
-    public static class WithMockito {
+    public class WithMockito {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = mock(List.class);

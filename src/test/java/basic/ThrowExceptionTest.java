@@ -11,15 +11,15 @@ import static org.mockito.Mockito.when;
 import java.util.List;
 
 import org.junit.Test;
-import org.junit.experimental.runners.Enclosed;
 import org.junit.runner.RunWith;
 
 import annotations.UnderTest;
+import de.bechte.junit.runners.context.HierarchicalContextRunner;
 
-@RunWith(Enclosed.class)
+@RunWith(HierarchicalContextRunner.class)
 public class ThrowExceptionTest {
 
-    public static class WithEasyMock {
+    public class WithEasyMock {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = createNiceMock(List.class);
@@ -43,7 +43,7 @@ public class ThrowExceptionTest {
         }
     }
 
-    public static class WithMockito {
+    public class WithMockito {
 
         @SuppressWarnings("unchecked")
         private final List<String> list = mock(List.class);
