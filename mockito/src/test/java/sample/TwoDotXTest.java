@@ -165,4 +165,10 @@ public class TwoDotXTest {
 
         verify(runnable, description("kernel panic - this just ended the world")).run();
     }
+
+    @Test
+    public void experimental_support_for_stubbing_final_classes() throws Exception {
+        assertThat(mock(StringBuilder.class), notNullValue());
+
+    }
 }
