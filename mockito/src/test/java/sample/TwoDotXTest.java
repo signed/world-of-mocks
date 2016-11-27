@@ -4,14 +4,17 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
+import org.mockito.junit.VerificationCollector;
 
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @Ignore
@@ -31,6 +34,9 @@ public class TwoDotXTest {
 
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
+
+    @Rule
+    public VerificationCollector collector = MockitoJUnit.collector();
 
     @Mock
     private InterfaceWithDefaultMethod mock;
@@ -56,5 +62,15 @@ public class TwoDotXTest {
     @Test
     public void hint_on_unused_stubbing() throws Exception {
         when(mock.audience()).thenReturn("something");
+    }
+
+    @Test
+    public void report_on_all_failed_method_verifications() throws Exception {
+
+        mock.audience();
+
+        verify(mock).stream();
+        verify(mock).audience();
+        verify(mock).maybe();
     }
 }
