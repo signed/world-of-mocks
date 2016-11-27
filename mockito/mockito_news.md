@@ -18,6 +18,8 @@ Requires Java 1.6 drop support for Java 1.5
 # What`s new?
 - no longer supports java 5
 - there no longer is a mockito-all artifact
+- switch from [CGLIB](https://github.com/cglib/cglib) to [bytebuddy](https://github.com/raphw/byte-buddy)
+- Mockito no longer depends on hamcrest
 
 
 # Blub
