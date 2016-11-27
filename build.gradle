@@ -1,18 +1,16 @@
-apply plugin: 'java'
+subprojects {
+    apply plugin: 'java'
 
-repositories {
-    jcenter()
-    mavenCentral()
-}
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 
-dependencies {
-    testCompile(
-            'org.mockito:mockito-core:1.10.19'
-            , 'org.easymock:easymock:3.4'
-            , 'junit:junit:4.12'
-            , 'de.bechte.junit:junit-hierarchicalcontextrunner:4.12.0'
-
-    )
+    dependencies {
+        testCompile(
+                'junit:junit:4.12'
+        )
+    }
 }
 
 task wrapper(type: Wrapper) {

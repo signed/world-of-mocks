@@ -12,8 +12,12 @@
   Will be focused on java 8
 
 Why is there no 2.0.0 release?
-
 Requires Java 1.6 drop support for Java 1.5
+
+
+# What`s new?
+- no longer supports java 5
+- there no longer is a mockito-all artifact
 
 
 # Blub
