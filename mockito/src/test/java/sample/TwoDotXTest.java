@@ -8,11 +8,9 @@ import org.mockito.AdditionalAnswers;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.mockito.junit.VerificationCollector;
-import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Answer1;
 import org.mockito.stubbing.Answer2;
 
@@ -28,9 +26,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @Ignore
 public class TwoDotXTest {
@@ -161,5 +157,12 @@ public class TwoDotXTest {
         }catch (RuntimeException ex){
             assertThat(ex.getMessage(), equalTo("message"));
         }
+    }
+
+    @Test
+    public void describe_what_just_went_wrong() throws Exception {
+        Runnable runnable = mock(Runnable.class);
+
+        verify(runnable, description("kernel panic - this just ended the world")).run();
     }
 }
