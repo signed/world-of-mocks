@@ -9,7 +9,9 @@ import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.mockito.junit.VerificationCollector;
+import org.mockito.stubbing.Answer2;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -17,9 +19,11 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.mockito.AdditionalAnswers.answer;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -122,5 +126,25 @@ public class TwoDotXTest {
         verify(builder).append(true);
         verify(builder).append("second");
         assertThat(artifact, equalTo("replacement"));
+    }
+
+    private interface Interface{
+        void one(String one);
+
+        void two(String one, int two);
+
+        Long oneReturingLong(int one);
+
+        BigDecimal twoReturningBigDecimal(int one, StringBuilder builder);
+    }
+
+    @Mock
+    private Interface answers;
+
+    @Test
+    public void new_strongly_typed_answers() throws Exception {
+        when(answers.twoReturningBigDecimal(anyInt(), any())).thenAnswer(answer((Answer2<BigDecimal, Integer, StringBuilder>) (argument0, argument1) -> new BigDecimal(argument0)));
+
+        assertThat(answers.twoReturningBigDecimal(7, null), equalTo(BigDecimal.valueOf(7L)));
     }
 }
