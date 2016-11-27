@@ -13,6 +13,7 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -72,5 +73,17 @@ public class TwoDotXTest {
         verify(mock).stream();
         verify(mock).audience();
         verify(mock).maybe();
+    }
+
+    private static abstract class Abstract {
+
+        public Abstract(){
+
+        }
+    }
+
+    @Test
+    public void spy_on() throws Exception {
+        assertThat( Mockito.spy(Abstract.class), notNullValue());
     }
 }
