@@ -3,16 +3,21 @@ package sample;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
 import org.mockito.junit.VerificationCollector;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.verify;
@@ -77,13 +82,45 @@ public class TwoDotXTest {
 
     private static abstract class Abstract {
 
-        public Abstract(){
+        public Abstract() {
 
         }
     }
 
     @Test
     public void spy_on() throws Exception {
-        assertThat( Mockito.spy(Abstract.class), notNullValue());
+        assertThat(Mockito.spy(Abstract.class), notNullValue());
+    }
+
+    private static class Builder {
+        private List<String> list = new ArrayList<>();
+
+        Builder append(boolean value) {
+            list.add(Boolean.toString(value));
+            return this;
+        }
+
+        Builder append(String value) {
+            list.add(value);
+            return this;
+        }
+
+        String build() {
+            return list.stream().collect(Collectors.joining(" "));
+        }
+    }
+
+    @Mock(answer = Answers.RETURNS_SELF)
+    private Builder builder;
+
+    @Test
+    public void new_answer_mode_for_builders() throws Exception {
+        when(builder.build()).thenReturn("replacement");
+
+        String artifact = builder.append(true).append("second").build();
+
+        verify(builder).append(true);
+        verify(builder).append("second");
+        assertThat(artifact, equalTo("replacement"));
     }
 }
