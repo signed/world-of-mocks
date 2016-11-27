@@ -1,8 +1,10 @@
 package sample;
 
+import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
+import org.mockito.AdditionalAnswers;
 import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -21,9 +23,9 @@ import java.util.stream.Stream;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.AdditionalAnswers.answer;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -143,8 +145,18 @@ public class TwoDotXTest {
 
     @Test
     public void new_strongly_typed_answers() throws Exception {
-        when(answers.twoReturningBigDecimal(anyInt(), any())).thenAnswer(answer((Answer2<BigDecimal, Integer, StringBuilder>) (argument0, argument1) -> new BigDecimal(argument0)));
+        when(answers.oneReturingLong(anyInt())).thenAnswer(AdditionalAnswers.answer(arg -> 42L));
+        assertThat(answers.oneReturingLong(-7), equalTo(42L));
 
+        when(answers.twoReturningBigDecimal(anyInt(), any())).thenAnswer(AdditionalAnswers.answer((Answer2<BigDecimal, Integer, StringBuilder>) (argument0, argument1) -> new BigDecimal(argument0)));
         assertThat(answers.twoReturningBigDecimal(7, null), equalTo(BigDecimal.valueOf(7L)));
+
+        doAnswer(AdditionalAnswers.answer((String arg) -> {throw new RuntimeException(arg);})).when(answers).one("message");
+        try{
+            answers.one("message");
+            Assert.fail("expected exceptions");
+        }catch (RuntimeException ex){
+            assertThat(ex.getMessage(), equalTo("message"));
+        }
     }
 }
