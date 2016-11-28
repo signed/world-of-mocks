@@ -15,6 +15,8 @@ public class VerificationCollectorTest {
 
     //@Rule
     //public VerificationCollector collector = MockitoJUnit.collector();
+
+    @SuppressWarnings("unchecked")
     private List<String> mock = Mockito.mock(List.class);
 
     @Test
