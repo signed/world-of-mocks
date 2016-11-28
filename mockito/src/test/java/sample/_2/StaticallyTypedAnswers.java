@@ -3,7 +3,6 @@ package sample._2;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.AdditionalAnswers;
-import org.mockito.Mock;
 import org.mockito.stubbing.Answer1;
 import org.mockito.stubbing.Answer2;
 
