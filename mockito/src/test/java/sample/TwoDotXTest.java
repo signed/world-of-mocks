@@ -5,7 +5,6 @@ import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.AdditionalAnswers;
-import org.mockito.Answers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
@@ -14,10 +13,7 @@ import org.mockito.stubbing.Answer1;
 import org.mockito.stubbing.Answer2;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.equalTo;
@@ -83,38 +79,6 @@ public class TwoDotXTest {
         assertThat(Mockito.spy(Abstract.class), notNullValue());
     }
 
-    private static class Builder {
-        private List<String> list = new ArrayList<>();
-
-        Builder append(boolean value) {
-            list.add(Boolean.toString(value));
-            return this;
-        }
-
-        Builder append(String value) {
-            list.add(value);
-            return this;
-        }
-
-        String build() {
-            return list.stream().collect(Collectors.joining(" "));
-        }
-    }
-
-    @Mock(answer = Answers.RETURNS_SELF)
-    private Builder builder;
-
-    @Test
-    public void new_answer_mode_for_builders() throws Exception {
-        when(builder.build()).thenReturn("replacement");
-
-        String artifact = builder.append(true).append("second").build();
-
-        verify(builder).append(true);
-        verify(builder).append("second");
-        assertThat(artifact, equalTo("replacement"));
-    }
-
     private interface Interface{
         void one(String one);
 
@@ -155,6 +119,5 @@ public class TwoDotXTest {
     @Test
     public void experimental_support_for_stubbing_final_classes() throws Exception {
         assertThat(mock(StringBuilder.class), notNullValue());
-
     }
 }
