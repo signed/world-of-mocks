@@ -37,6 +37,7 @@ Mockito 3 will be java 8 only
 [Issues completed for 2.1](https://github.com/mockito/mockito/milestone/1?closed=1)
 [Issue for 2.1 documentation update](https://github.com/mockito/mockito/issues/596)
 [Release Notes](https://github.com/mockito/mockito/blob/master/doc/release-notes/official.md)
+[Incompatible changes in 2.1](https://github.com/mockito/mockito/issues?utf8=%E2%9C%93&q=label%3A%221.*%20incompatible%22%20)
 
 # New Stuff
 MockitoJunitRunner strict mode
