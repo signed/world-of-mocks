@@ -12,11 +12,8 @@ import java.util.List;
 
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.ArgumentMatchers.anyInt;
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.description;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Matchers.anyInt;
+import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.when;
 
 @Ignore
@@ -44,13 +41,6 @@ public class TwoDotXTest {
     @Test
     public void spy_on() throws Exception {
         assertThat(Mockito.spy(Abstract.class), notNullValue());
-    }
-
-    @Test
-    public void describe_what_just_went_wrong() throws Exception {
-        Runnable runnable = mock(Runnable.class);
-
-        verify(runnable, description("kernel panic - this just ended the world")).run();
     }
 
 }

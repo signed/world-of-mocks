@@ -1,11 +1,7 @@
 package sample._2;
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.junit.MockitoJUnit;
-import org.mockito.junit.VerificationCollector;
 
 import java.util.List;
 
