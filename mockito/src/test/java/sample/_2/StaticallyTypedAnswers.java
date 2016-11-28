@@ -19,7 +19,7 @@ public class StaticallyTypedAnswers {
 
     @Test
     public void new_strongly_typed_answers() throws Exception {
-        Answer<Long> answer = invocation -> 42L + invocation.getArgumentAt(0, Integer.class);
+        Answer<Long> answer = invocation -> 42L + (int) invocation.getArguments()[0];
         //answer = AdditionalAnswers.answer((Answer1<Long, Integer>) argument -> 42L + argument);
         when(answers.oneReturningLong(anyInt())).thenAnswer(answer);
 
