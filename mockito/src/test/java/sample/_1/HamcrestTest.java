@@ -1,6 +1,5 @@
 package sample._1;
 
-import org.hamcrest.CoreMatchers;
 import org.junit.Test;
 import org.mockito.Mockito;
 
