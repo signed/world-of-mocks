@@ -13,8 +13,8 @@ import static org.mockito.Mockito.verify;
 
 public class VerificationCollectorTest {
 
-    @Rule
-    public VerificationCollector collector = MockitoJUnit.collector();
+    //@Rule
+    //public VerificationCollector collector = MockitoJUnit.collector();
     private List<String> mock = Mockito.mock(List.class);
 
     @Test
