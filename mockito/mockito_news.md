@@ -40,3 +40,7 @@ Mockito 3 will be java 8 only
 
 # New Stuff
 MockitoJunitRunner strict mode
+
+follow up on incubating @Incubating
+follow up on in since 2.x
+follow up on incompatible
