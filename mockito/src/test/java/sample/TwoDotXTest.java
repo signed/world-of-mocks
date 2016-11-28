@@ -46,9 +46,6 @@ public class TwoDotXTest {
     @Rule
     public MockitoRule rule = MockitoJUnit.rule();
 
-    @Rule
-    public VerificationCollector collector = MockitoJUnit.collector();
-
     @Mock
     private InterfaceWithDefaultMethod mock;
 
@@ -73,16 +70,6 @@ public class TwoDotXTest {
     @Test
     public void hint_on_unused_stubbing() throws Exception {
         when(mock.audience()).thenReturn("something");
-    }
-
-    @Test
-    public void report_on_all_failed_method_verifications() throws Exception {
-
-        mock.audience();
-
-        verify(mock).stream();
-        verify(mock).audience();
-        verify(mock).maybe();
     }
 
     private static abstract class Abstract {
