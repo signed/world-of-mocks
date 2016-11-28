@@ -55,4 +55,13 @@ public class MatchersTest {
         assertThat("should match", listOfObject.add(42L));
         assertThat("should match", listOfObject.add("a string"));
     }
+
+    @Test
+    public void any_object_matcher() throws Exception {
+        when(listOfObject.add(Mockito.anyObject())).thenReturn(true);
+
+        assertThat("should match", listOfObject.add(null));
+        assertThat("should match", listOfObject.add(new Object()));
+        assertThat("should match", listOfObject.add("a string"));
+    }
 }
