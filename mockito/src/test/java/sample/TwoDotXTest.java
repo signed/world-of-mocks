@@ -1,28 +1,20 @@
 package sample;
 
-import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Rule;
 import org.junit.Test;
-import org.mockito.AdditionalAnswers;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.mockito.stubbing.Answer1;
-import org.mockito.stubbing.Answer2;
 
-import java.math.BigDecimal;
 import java.util.Optional;
 import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.description;
-import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -90,8 +82,4 @@ public class TwoDotXTest {
         verify(runnable, description("kernel panic - this just ended the world")).run();
     }
 
-    @Test
-    public void experimental_support_for_stubbing_final_classes() throws Exception {
-        assertThat(mock(StringBuilder.class), notNullValue());
-    }
 }
