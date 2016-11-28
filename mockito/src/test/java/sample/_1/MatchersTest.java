@@ -41,7 +41,6 @@ public class MatchersTest {
     public void any_string_matcher() throws Exception {
         when(listOfObject.add(anyString())).thenReturn(true);
 
-
         assertThat("should match", listOfObject.add(null));
         assertThat("should match", listOfObject.add("any string"));
         assertThat("should match", listOfObject.add(34));
@@ -53,6 +52,7 @@ public class MatchersTest {
 
         assertThat("should match", listOfObject.add(null));
         assertThat("should match", listOfObject.add(42));
-        assertThat("should not match", listOfObject.add(42L));
+        assertThat("should match", listOfObject.add(42L));
+        assertThat("should match", listOfObject.add("a string"));
     }
 }
