@@ -10,7 +10,6 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
-import org.mockito.junit.VerificationCollector;
 import org.mockito.stubbing.Answer1;
 import org.mockito.stubbing.Answer2;
 

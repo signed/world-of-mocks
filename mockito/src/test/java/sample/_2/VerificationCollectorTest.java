@@ -1,4 +1,4 @@
-package sample;
+package sample._2;
 
 import org.junit.Rule;
 import org.junit.Test;
