@@ -3,6 +3,8 @@ package sample._2;
 import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.AdditionalAnswers;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.mockito.stubbing.Answer1;
 import org.mockito.stubbing.Answer2;
 
@@ -18,33 +20,19 @@ import static org.mockito.Mockito.when;
 
 public class StaticallyTypedAnswers {
 
-    private interface Interface{
-        void one(String one);
-
-        void two(String one, int two);
-
-        Long oneReturningLong(int one);
-
-        BigDecimal twoReturningBigDecimal(int one, StringBuilder builder);
+    private interface Interface {
+        Long oneReturningLong(int argument);
     }
 
     private Interface answers = mock(Interface.class);
 
     @Test
     public void new_strongly_typed_answers() throws Exception {
-        when(answers.oneReturningLong(anyInt())).thenAnswer(AdditionalAnswers.answer((Answer1<Long, Integer>) argument0 -> 42L + argument0));
+        Answer<Long> answer = invocation -> 42L + (int) invocation.getArgument(0);
+        //answer = AdditionalAnswers.answer((Answer1<Long, Integer>) argument -> 42L + argument);
+        when(answers.oneReturningLong(anyInt())).thenAnswer(answer);
+
         assertThat(answers.oneReturningLong(5), equalTo(47L));
-
-        when(answers.twoReturningBigDecimal(anyInt(), any())).thenAnswer(AdditionalAnswers.answer((Answer2<BigDecimal, Integer, StringBuilder>) (argument0, argument1) -> new BigDecimal(argument0)));
-        assertThat(answers.twoReturningBigDecimal(7, null), equalTo(BigDecimal.valueOf(7L)));
-
-        doAnswer(AdditionalAnswers.answerVoid((String arg) -> {throw new RuntimeException(arg);})).when(answers).one("message");
-        try{
-            answers.one("message");
-            Assert.fail("expected exceptions");
-        }catch (RuntimeException ex){
-            assertThat(ex.getMessage(), equalTo("message"));
-        }
     }
 
 }
