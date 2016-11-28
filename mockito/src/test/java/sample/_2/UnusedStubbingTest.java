@@ -1,5 +1,6 @@
 package sample._2;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -24,5 +25,12 @@ public class UnusedStubbingTest {
     public void hint_on_unused_stubbing() throws Exception {
         when(list.get(anyInt())).thenReturn("something");
         when(list.add(anyString())).thenReturn(true);
+    }
+
+    @Test
+    public void do_not_hint_on_unused_stubbing_for_failing_tests() throws Exception {
+        when(list.get(anyInt())).thenReturn("something");
+
+        Assert.fail();
     }
 }
