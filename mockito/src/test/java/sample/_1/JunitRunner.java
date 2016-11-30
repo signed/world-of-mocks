@@ -18,7 +18,7 @@ public class JunitRunner {
     private Function<String, String> function;
 
     @Test
-    public void name() throws Exception {
+    public void over_specified_test() throws Exception {
         when(function.apply("banana")).thenReturn("bread");
         when(function.apply("sweet")).thenReturn("chilly");
 
