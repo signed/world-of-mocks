@@ -6,6 +6,7 @@ import org.mockito.stubbing.Answer;
 
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -20,9 +21,11 @@ public class AnswersTest {
         when(list.add(anyString())).then(new Answer<Boolean>() {
             @Override
             public Boolean answer(InvocationOnMock invocation) throws Throwable {
-                invocation.getArgumentAt(0, String.class);
-                return true;
+                String argument = invocation.getArgumentAt(0, String.class);
+                return "example".equals(argument);
             }
         });
+
+        assertThat("should succeed", list.add("example"));
     }
 }
