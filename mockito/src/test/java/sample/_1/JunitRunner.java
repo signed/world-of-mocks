@@ -12,6 +12,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.mockito.Mockito.when;
 
 @RunWith(MockitoJUnitRunner.class)
+//@RunWith(MockitoJUnitRunner.Silent.class)
 public class JunitRunner {
 
     @Mock
