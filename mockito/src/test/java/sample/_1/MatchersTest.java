@@ -23,6 +23,7 @@ public class MatchersTest {
     @Test
     public void hamcrest_matcher_for_arguments() throws Exception {
         when(listOfString.add(Mockito.argThat(equalTo("example")))).thenReturn(true);
+        //when(listOfString.add(Mockito.argThat("example"::equals))).thenReturn(true);
 
         assertThat("Should not match", !listOfString.add("unknown"));
         assertThat("Should match", listOfString.add("example"));
