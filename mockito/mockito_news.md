@@ -21,7 +21,7 @@
 2. What is new?
 
 # Links
-[Mockito](http://mockito.org)
-[Release Notes](https://github.com/mockito/mockito/blob/master/doc/release-notes/official.md)
-[Continious Delivery Model Issue](https://github.com/mockito/mockito/issues/618) ongoing discussion
-[Sample code on Github](https://github.com/signed/world-of-mocks)
+- [Mockito](http://mockito.org)
+- [Release Notes](https://github.com/mockito/mockito/blob/master/doc/release-notes/official.md)
+- [Continuous Delivery Model](https://github.com/mockito/mockito/issues/618) ongoing discussion
+- [Sample code on Github](https://github.com/signed/world-of-mocks)
