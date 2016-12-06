@@ -4,7 +4,7 @@
   ...
 - 22-Aug-2016 2.0.111-beta	
 - 24-Aug-2016 2.0.0-beta.112
-- 10-Sep-2016 2.1.0-beta.126 [Stopped publishing CD versions to central](https://github.com/mockito/mockito/issues/595)
+- 10-Sep-2016 2.1.0-beta.126 [Stopped publishing beta versions to central](https://github.com/mockito/mockito/issues/595)
 - 03-Oct-2016 2.1.0	
 - 10-Oct-2016 2.2.0	
 - 25-Nov-2016 2.2.25
