@@ -29,6 +29,30 @@ describe('stuff', function () {
         }
     };
 
+    function functionUnderTest() {
+        return 'result from production function'
+    }
+
+    describe('anonymous spies', function () {
+        const anonymousSpy = spy();
+        it('that was never called', function () {
+            assert.isFalse(anonymousSpy.called);
+        });
+
+        it('called at least once', function () {
+            anonymousSpy('argument');
+
+            assert.isTrue(anonymousSpy.called);
+            assert.equal(anonymousSpy.getCall(0).args[0], 'argument');
+        });
+    });
+
+    describe('spying on an existing function', function () {
+        const functionSpy = spy(functionUnderTest);
+
+        assert.equal(functionSpy(), 'result from production function');
+    });
+
     describe('stub actual code for the test', function () {
 
         it('production code', function () {
