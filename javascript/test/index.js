@@ -7,7 +7,13 @@ const sinon = require('sinon');
 const hamjest = require('hamjest');
 const assertThat = hamjest.assertThat;
 const equalTo = hamjest.equalTo;
-const assert = require('chai').assert;
+const chai = require('chai');
+const assert = chai.assert;
+var sinonChai = require("sinon-chai");
+const expect = chai.expect;
+
+chai.use(sinonChai);
+sinon.assert.expose(chai.assert, {prefix: ""});
 
 
 const sandbox = sinon.sandbox.create();
@@ -29,7 +35,7 @@ describe('stuff', function () {
         }
     };
 
-    function functionUnderTest() {
+    function functionUnderTest(argument) {
         return 'result from production function'
     }
 
@@ -51,6 +57,15 @@ describe('stuff', function () {
         const functionSpy = spy(functionUnderTest);
 
         assert.equal(functionSpy(), 'result from production function');
+    });
+
+    describe('validate an expected call actually happend', function () {
+        const functionSpy = spy(functionUnderTest);
+
+        functionSpy('argument');
+
+        assert.calledWith(functionSpy, 'argument');
+        expect(functionSpy).not.calledWith('argument2');
     });
 
     describe('stub actual code for the test', function () {

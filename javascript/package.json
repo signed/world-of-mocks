@@ -10,12 +10,13 @@
   "author": "signed",
   "license": "ISC",
   "devDependencies": {
+    "@types/chai": "3.4.35",
     "@types/mocha": "2.2.39",
     "@types/sinon": "1.16.35",
-    "@types/chai": "3.4.35",
+    "chai": "3.5.0",
     "hamjest": "2.13.0",
     "mocha": "3.2.0",
     "sinon": "1.17.7",
-    "chai": "3.5.0"
+    "sinon-chai": "2.8.0"
   }
 }
