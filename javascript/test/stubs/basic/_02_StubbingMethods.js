@@ -28,13 +28,12 @@ describe('make a method return a value', function () {
 
     describe('sinon', function () {
 
-        it('stub calls override each other', function () {
+        it('subsequent calls to return or throws override each other', function () {
             const stub = sinon.createStubInstance(Array);
             stub.pop.returns('nope');
             stub.pop.returns('yes');
 
             assert.equal(stub.pop(), 'yes');
-
         });
 
         it('different on subsequent calls', function () {
