@@ -34,6 +34,8 @@ describe('make a method return a value', function () {
             stub.pop.returns('yes');
 
             assert.equal(stub.pop(), 'yes');
+            assert.equal(stub.pop(), 'yes');
+            assert.equal(stub.pop(), 'yes');
         });
 
         it('different on subsequent calls', function () {
@@ -44,6 +46,18 @@ describe('make a method return a value', function () {
 
             assert.equal(stub.pop(), 'last element');
             assert.equal(stub.pop(), 'second call');
+            assert.equal(stub.pop(), undefined);
+        });
+
+        it('argument specific returns', function () {
+            const stub = sinon.createStubInstance(Array);
+            stub.slice.withArgs(1, 2).returns(['one', 'two']);
+            stub.slice.withArgs(1).returns(['one']);
+            stub.slice.withArgs(2).returns(['two']);
+
+            assert.sameMembers(stub.slice(1), ['one'])
+            assert.sameMembers(stub.slice(2), ['two'])
+            assert.sameMembers(stub.slice(1, 2), ['one', 'two'])
         });
     });
 });
